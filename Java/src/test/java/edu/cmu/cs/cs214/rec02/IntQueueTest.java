@@ -12,20 +12,24 @@ import java.util.Scanner;
 
 import static org.junit.Assert.*;
 
-
 /**
- * TODO: 
- * 1. The {@link LinkedIntQueue} has no bugs. We've provided you with some example test cases.
- * Write your own unit tests to test against IntQueue interface with specification testing method 
+ * TODO:
+ * 1. The {@link LinkedIntQueue} has no bugs. We've provided you with some
+ * example test cases.
+ * Write your own unit tests to test against IntQueue interface with
+ * specification testing method
  * using mQueue = new LinkedIntQueue();
  * 
- * 2. 
- * Comment `mQueue = new LinkedIntQueue();` and uncomment `mQueue = new ArrayIntQueue();`
- * Use your test cases from part 1 to test ArrayIntQueue and find bugs in the {@link ArrayIntQueue} class
- * Write more unit tests to test the implementation of ArrayIntQueue, with structural testing method
+ * 2.
+ * Comment `mQueue = new LinkedIntQueue();` and uncomment `mQueue = new
+ * ArrayIntQueue();`
+ * Use your test cases from part 1 to test ArrayIntQueue and find bugs in the
+ * {@link ArrayIntQueue} class
+ * Write more unit tests to test the implementation of ArrayIntQueue, with
+ * structural testing method
  * Aim to achieve 100% line coverage for ArrayIntQueue
  *
- * @author Alex Lockwood, George Guo, Terry Li
+ * author Alex Lockwood, George Guo, Terry Li
  */
 public class IntQueueTest {
 
@@ -38,8 +42,8 @@ public class IntQueueTest {
     @Before
     public void setUp() {
         // comment/uncomment these lines to test each class
-        mQueue = new LinkedIntQueue();
-    //    mQueue = new ArrayIntQueue();
+        // mQueue = new LinkedIntQueue();
+        mQueue = new ArrayIntQueue();
 
         testList = new ArrayList<>(List.of(1, 2, 3));
     }
@@ -52,24 +56,24 @@ public class IntQueueTest {
 
     @Test
     public void testNotEmpty() {
-        // TODO: write your own unit test
-        fail("Test not implemented");
+        mQueue.enqueue(1);
+        assertFalse(mQueue.isEmpty());
     }
 
     @Test
     public void testPeekEmptyQueue() {
-        // TODO: write your own unit test
-        fail("Test not implemented");
+        assertNull(mQueue.peek());
     }
 
     @Test
     public void testPeekNoEmptyQueue() {
-        // TODO: write your own unit test
-        fail("Test not implemented");
+        mQueue.enqueue(1);
+        assertNotNull(mQueue.peek());
     }
 
     @Test
     public void testEnqueue() {
+        // This is an example unit test
         // This is an example unit test
         for (int i = 0; i < testList.size(); i++) {
             mQueue.enqueue(testList.get(i));
@@ -80,8 +84,33 @@ public class IntQueueTest {
 
     @Test
     public void testDequeue() {
-        // TODO: write your own unit test
-        fail("Test not implemented");
+        for (int i = 0; i < testList.size(); i++) {
+            mQueue.enqueue(testList.get(i));
+        }
+
+        for (int i = 0; i < testList.size(); i++) {
+            assertEquals(testList.get(i), mQueue.dequeue());
+            assertEquals(testList.size() - i - 1, mQueue.size());
+        }
+    }
+
+    @Test
+    public void testDequeueEmptyQueue() {
+        assertTrue(mQueue.isEmpty());
+        assertNull(mQueue.dequeue());
+    }
+
+    @Test
+    public void testClear() {
+        for (int i = 0; i < testList.size(); i++) {
+            mQueue.enqueue(testList.get(i));
+        }
+
+        mQueue.clear();
+
+        assertTrue(mQueue.isEmpty());
+        assertEquals(0, mQueue.size());
+        assertNull(mQueue.peek());
     }
 
     @Test
@@ -105,5 +134,20 @@ public class IntQueueTest {
         }
     }
 
+    @Test
+    public void testEnsureCapacity() {
+        // Fill the queue to its initial capacity
+        for (int i = 0; i < 10; i++) {
+            mQueue.enqueue(i);
+        }
 
+        // Add one more element to trigger capacity increase
+        mQueue.enqueue(10);
+
+        // Verify the queue size and elements
+        assertEquals(11, mQueue.size());
+        for (int i = 0; i < 11; i++) {
+            assertEquals(i, mQueue.dequeue().intValue());
+        }
+    }
 }
