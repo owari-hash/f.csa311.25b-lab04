@@ -1,20 +1,23 @@
-name: build
+name: Run Tests on Push
+
 on:
-  pull_request:
+  push:
+    branches:
+      - main # Change this if you want to run on another branch
 
 jobs:
-  build:
-    name: Build and Run Tests
+  test:
     runs-on: ubuntu-latest
-    # Permissions block is optional, useful for dependabot checks
-    permissions:
-      checks: write
-      contents: read
+
     steps:
-      - name: Checkout Code
+      - name: Checkout repository
         uses: actions/checkout@v4
-      - name: Build and Run Tests
-        run: mvn test --batch-mode --fail-at-end
-      - name: Publish Test Report
-        if: success() || failure()
-        uses: scacap/action-surefire-report@v1
+
+      - name: Set up Java
+        uses: actions/setup-java@v3
+        with:
+          distribution: "temurin" # Use 'zulu' or 'adopt' if needed
+          java-version: "17" # Change this to your project's Java version
+
+      - name: Run Tests
+        run: mvn test
