@@ -74,7 +74,6 @@ public class IntQueueTest {
     @Test
     public void testEnqueue() {
         // This is an example unit test
-        // This is an example unit test
         for (int i = 0; i < testList.size(); i++) {
             mQueue.enqueue(testList.get(i));
             assertEquals(testList.get(0), mQueue.peek());
