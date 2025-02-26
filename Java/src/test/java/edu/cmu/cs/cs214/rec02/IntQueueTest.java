@@ -42,8 +42,8 @@ public class IntQueueTest {
     @Before
     public void setUp() {
         // comment/uncomment these lines to test each class
-        // mQueue = new LinkedIntQueue();
-        mQueue = new ArrayIntQueue();
+        mQueue = new LinkedIntQueue();
+        // mQueue = new ArrayIntQueue();
 
         testList = new ArrayList<>(List.of(1, 2, 3));
     }
@@ -56,7 +56,6 @@ public class IntQueueTest {
 
     @Test
     public void testNotEmpty() {
-        mQueue.enqueue(1);
         assertFalse(mQueue.isEmpty());
     }
 
