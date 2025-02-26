@@ -9,3 +9,4 @@ mvn test – тестүүдийг ажиллуулж, target/site/jacoco/index.h
 mvn site – төслийг бүтээж, тестийг ажиллуулан, үр дүнг target/site/index.html файлд хадгалах (хамрах хүрээ, тестийн үр дүнг багтаасан)
 Энэхүү тохиргооны техникийн дэлгэрэнгүйг pom.xml файл дахь тайлбаруудаас үзнэ үү.
 jhksgfdhsjgd
+skdjlfhgdhkfjgdkfjg
